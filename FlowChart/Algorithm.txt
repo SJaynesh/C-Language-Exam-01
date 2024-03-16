@@ -1,0 +1,17 @@
+Algorithm:
+
+1) Start
+
+2) Create a size name variable and Input the user.
+
+3) After that create a 1D array and assign size.
+
+4) Input the 1D Array using loop.
+
+5) Create a integer variable for small and assign zero value.
+
+6) After that create loop and check array element and small element store the small variable.
+
+7) Print the small variable.
+
+8) End
