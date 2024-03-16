@@ -13,10 +13,12 @@ struct Products
 int main()
 {
 
-    int n, size, add = 0;
+    int n, size, add = 0, dup = 0;
     int id;
     float sum = 0;
     float mul = 1;
+
+    struct Products p1[100];
     do
     {
         printf("\n\n\n\t Inventory Management System \n");
@@ -31,8 +33,6 @@ int main()
         // printf("Enter number of products: ");
         // scanf("%d", &size);
 
-        struct Products p1[100];
-
         printf("\nEnter any choice\t: ");
         scanf("%d", &n);
 
@@ -40,19 +40,40 @@ int main()
         {
         case 01:
             system("cls");
+
             printf("\n\tAdd All Products\n\n");
             printf("Enter Product Id\t:");
             scanf("%d", &p1[add].product_id);
-            fflush(stdin);
-            printf("Enter Product Name\t:");
-            scanf("%[^\n]", &p1[add].product_name);
-            printf("Enter Product Price\t:");
-            scanf("%f", &p1[add].price);
-            printf("Enter Product Qty\t:");
-            scanf("%d", &p1[add].qty);
+            for (int i = 0; i <= add; i++)
+            {
+                for (int j = i + 1; j <= add; j++)
+                {
+                    if (p1[i].product_id == p1[j].product_id)
+                    {
+                        dup = j;
+                        break;
+                    }
+                }
+                if (dup != 0)
+                    break;
+            }
+            if (dup == 0)
+            {
+                fflush(stdin);
+                printf("Enter Product Name\t:");
+                scanf("%[^\n]", &p1[add].product_name);
+                printf("Enter Product Price\t:");
+                scanf("%f", &p1[add].price);
+                printf("Enter Product Qty\t:");
+                scanf("%d", &p1[add].qty);
 
+                system("cls");
+            }
+            else
+            {
+                printf("%d is duplicate ID", p1[dup].product_id);
+            }
             add++;
-            system("cls");
             break;
 
         case 02:
@@ -165,8 +186,7 @@ int main()
             printf("\t--\t----\t-----\t---\n");
             for (int i = 0; i < add; i++)
             {
-                if (id == p1[i].product_id)
-                    printf("\t%d\t%s\t%0.2f\t%d\n", p1[i].product_id, p1[i].product_name, p1[i].price, p1[i].qty);
+                printf("\t%d\t%s\t%0.2f\t%d\n", p1[i].product_id, p1[i].product_name, p1[i].price, p1[i].qty);
             }
 
             printf("\n\nTotal\t: %0.2f\n", sum);
@@ -184,6 +204,15 @@ int main()
         }
 
     } while (n != 7);
+
+    FILE *fp;
+
+    fp = fopen("product.txt", "w");
+
+    for (int i = 0; i < add; i++)
+    {
+        fprintf(fp, "ID %d\t: %d\n", i + 1, p1[i].product_id);
+    }
 
     return 0;
 }
