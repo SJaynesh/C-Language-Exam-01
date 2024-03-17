@@ -56,9 +56,14 @@ public:
              << endl;
 
         cout << endl
-             << "\tITEM ID\tITEM NAME\tPRICE\tSIZE\tINGREDIENTS\tCATEGORY\t" << endl;
+             << "\tID\tNAME\tPRICE\tSIZE\tINGREDIENTS\tCATEGORY\t" << endl;
         cout << endl
-             << "-------\t----------\t----\t----\t-----------\t--------\t" << endl;
+             << "\t--\t----\t-----\t----\t-----------\t--------\t" << endl;
+    }
+
+    double totalSum()
+    {
+        return price;
     }
 };
 
@@ -102,9 +107,13 @@ public:
              << endl;
 
         cout << endl
-             << "\tITEM ID\tITEM NAME\tPRICE\tSIZE\tINGREDIENTS\tCATEGORY\t" << endl;
+             << "\tID\tNAME\tPRICE\tSIZE\tINGREDIENTS\tCATEGORY\t" << endl;
         cout << endl
-             << "-------\t----------\t----\t----\t-----------\t--------\t" << endl;
+             << "\t--\t----\t-----\t----\t-----------\t--------\t" << endl;
+    }
+    double totalSum()
+    {
+        return price;
     }
 };
 
@@ -148,9 +157,14 @@ public:
              << endl;
 
         cout << endl
-             << "\tITEM ID\tITEM NAME\tPRICE\tSIZE\tINGREDIENTS\tCATEGORY\t" << endl;
+             << "\tID\tNAME\tPRICE\tSIZE\tINGREDIENTS\tCATEGORY\t" << endl;
         cout << endl
-             << "\t-------\t----------\t----\t----\t-----------\t--------\t" << endl;
+             << "\t--\t----\t-----\t----\t-----------\t--------\t" << endl;
+    }
+
+    double totalSum()
+    {
+        return price;
     }
 };
 
@@ -191,6 +205,7 @@ int main()
 
     int b = 0, m = 0, d = 0;
     int n;
+    double sum = 0;
     Beverage b1[b];
     MainCourse m1[m];
     Dessert d1[d];
@@ -270,6 +285,34 @@ int main()
             break;
 
         case 03:
+            system("cls");
+
+            menu.Dessert::menuDisplay();
+
+            sum = 0;
+
+            for (int i = 0; i < b; i++)
+            {
+                b1[i].getMenuItemsForBeverages();
+                double b1Sum = b1[i].totalSum();
+                sum += b1Sum;
+            }
+            for (int i = 0; i < m; i++)
+            {
+                m1[i].getMenuItemsForMainCourse();
+                double m1Sum = m1[i].totalSum();
+                sum += m1Sum;
+            }
+            for (int i = 0; i < d; i++)
+            {
+                d1[i].getMenuItemsForDessert();
+                double d1Sum = d1[i].totalSum();
+                sum += d1Sum;
+            }
+
+            cout << endl
+                 << "TOTAL\t\t: " << sum << endl;
+
             break;
 
         case 04:
